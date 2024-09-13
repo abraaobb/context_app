@@ -1,0 +1,21 @@
+import 'package:context_app/constants/colors.dart';
+import 'package:context_app/constants/dimensions.dart';
+import 'package:flutter/material.dart';
+
+class WelcomeText extends StatelessWidget {
+  const WelcomeText({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: Dimensions.defaultPadding,
+      decoration: BoxDecoration(
+          color: AppColors.tipBackground,
+          borderRadius: Dimensions.defaultBorder),
+      child: const Text(
+        'Descubra a palavra secreta do dia através do significado.\n\nDepois de enviar uma palavra, você verá o quão próximo ela está da resposta.\n\nPalavras são mais próximas quando são frequentemente utilizadas no mesmo contexto.',
+        style: TextStyle(fontSize: 16),
+      ),
+    );
+  }
+}
