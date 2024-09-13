@@ -11,7 +11,20 @@ class HomeScreen extends StatelessWidget {
     return const Padding(
         padding: Dimensions.defaultPadding,
         child: Column(
-          children: [GameStatus(), WelcomeText()],
+          children: [
+            GameStatus(),
+            TextField(
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black)),
+                  hintText: 'Digite uma palavra',
+                  filled: true,
+                  fillColor: Colors.white,
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 2))),
+            ),
+            WelcomeText(),
+          ],
         ));
   }
 }
