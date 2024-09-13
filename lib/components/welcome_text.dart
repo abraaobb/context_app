@@ -11,7 +11,7 @@ class WelcomeText extends StatelessWidget {
       padding: Dimensions.defaultPadding,
       decoration: BoxDecoration(
           color: AppColors.tipBackground,
-          borderRadius: Dimensions.defaultBorder),
+          borderRadius: Dimensions.defaultRadius),
       child: const Text(
         'Descubra a palavra secreta do dia através do significado.\n\nDepois de enviar uma palavra, você verá o quão próximo ela está da resposta.\n\nPalavras são mais próximas quando são frequentemente utilizadas no mesmo contexto.',
         style: TextStyle(fontSize: 16),
