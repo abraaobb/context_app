@@ -9,7 +9,6 @@ class WordList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       shrinkWrap: true,
-      padding: Dimensions.defaultPadding,
       children: const [
         WordItem(320, 'piloto'),
         WordItem(200, 'maria'),

@@ -14,6 +14,9 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             GameStatus(),
+            SizedBox(
+              height: 10,
+            ),
             TextField(
               decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -24,7 +27,13 @@ class HomeScreen extends StatelessWidget {
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black, width: 2))),
             ),
+            SizedBox(
+              height: 10,
+            ),
             WelcomeText(),
+            SizedBox(
+              height: 10,
+            ),
             WordList()
           ],
         ));
