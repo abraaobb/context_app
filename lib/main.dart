@@ -18,7 +18,10 @@ class ContextApp extends StatelessWidget {
         home: Scaffold(
           backgroundColor: AppColors.defaultBackground,
           appBar: AppBar(
-            title: const Text('CONTEXTO'),
+            title: const Text(
+              'CONTEXTO',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             centerTitle: true,
             backgroundColor: AppColors.defaultBackground,
           ),
