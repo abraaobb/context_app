@@ -1,5 +1,4 @@
 import 'package:context_app/components/word_item.dart';
-import 'package:context_app/constants/dimensions.dart';
 import 'package:flutter/material.dart';
 
 class WordList extends StatelessWidget {

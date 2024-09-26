@@ -9,10 +9,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
+    return Padding(
         padding: Dimensions.defaultPadding,
-        child: Column(
-          children: [
+        child: ListView(
+          children: const [
             GameStatus(),
             SizedBox(
               height: 10,
