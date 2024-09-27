@@ -7,13 +7,17 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+  final attemps = 2;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: Dimensions.defaultPadding,
         child: ListView(
-          children: const [
-            GameStatus(),
+          children: [
+            GameStatus(
+              attemps: attemps,
+            ),
             SizedBox(
               height: 10,
             ),
@@ -30,11 +34,11 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            WelcomeText(),
+            Offstage(offstage: attemps != 0, child: WelcomeText()),
             SizedBox(
               height: 10,
             ),
-            WordList()
+            Offstage(offstage: attemps == 0, child: WordList())
           ],
         ));
   }

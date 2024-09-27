@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
 
 class GameStatus extends StatelessWidget {
-  const GameStatus({super.key});
+  int attemps;
+  GameStatus({required this.attemps, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
-        Text(
+        const Text(
           'JOGO: ',
         ),
-        Text(
+        const Text(
           '#123',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             children: [
-              Text('TENTATIVAS: '),
+              const Text('TENTATIVAS: '),
               Text(
-                '0',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                attemps.toString(),
+                style: const TextStyle(fontWeight: FontWeight.bold),
               )
             ],
           ),
