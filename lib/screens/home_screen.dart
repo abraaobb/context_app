@@ -1,13 +1,24 @@
 import 'package:context_app/components/game_status.dart';
 import 'package:context_app/components/welcome_text.dart';
+import 'package:context_app/components/word_item.dart';
 import 'package:context_app/components/word_list.dart';
 import 'package:context_app/constants/dimensions.dart';
 import 'package:flutter/material.dart';
+import 'dart:developer' as developer;
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  HomeScreen({super.key});
 
-  final attemps = 2;
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController inputController = TextEditingController();
+
+  int attemps = 0;
+
+  List<WordItem> wordList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +33,8 @@ class HomeScreen extends StatelessWidget {
               height: 10,
             ),
             TextField(
+              controller: inputController,
+              onSubmitted: getText,
               decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black)),
@@ -38,8 +51,15 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Offstage(offstage: attemps == 0, child: WordList())
+            Offstage(offstage: attemps == 0, child: WordList(items: wordList))
           ],
         ));
+  }
+
+  void getText(String value) {
+    setState(() {
+      attemps++;
+    });
+    developer.log('usuario digitou: $value e foi tentativa: $attemps');
   }
 }

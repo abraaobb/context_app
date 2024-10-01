@@ -25,7 +25,7 @@ class ContextApp extends StatelessWidget {
             centerTitle: true,
             backgroundColor: AppColors.defaultBackground,
           ),
-          body: const HomeScreen(),
+          body: HomeScreen(),
         ));
   }
 }
