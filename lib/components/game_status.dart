@@ -1,8 +1,10 @@
+import 'package:context_app/services/word_service.dart';
 import 'package:flutter/material.dart';
 
 class GameStatus extends StatelessWidget {
   int attemps;
   GameStatus({required this.attemps, super.key});
+  final WordService wordService = WordService();
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +13,9 @@ class GameStatus extends StatelessWidget {
         const Text(
           'JOGO: ',
         ),
-        const Text(
-          '#123',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        Text(
+          '#${wordService.getGameId()}',
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
