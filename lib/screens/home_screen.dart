@@ -1,17 +1,14 @@
-import 'dart:math';
-
 import 'package:context_app/components/game_status.dart';
+import 'package:context_app/components/result.dart';
 import 'package:context_app/components/welcome_text.dart';
 import 'package:context_app/components/word_item.dart';
 import 'package:context_app/components/word_list.dart';
 import 'package:context_app/constants/dimensions.dart';
 import 'package:context_app/services/word_service.dart';
 import 'package:flutter/material.dart';
-import 'dart:developer' as developer;
-import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -22,6 +19,9 @@ class _HomeScreenState extends State<HomeScreen> {
   final WordService wordService = WordService();
 
   int attemps = 0;
+  String currentWord = '';
+  int currentDistance = 0;
+  bool isRepeatedWord = false;
 
   List<WordItem> wordList = [];
 
@@ -34,13 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
             GameStatus(
               attemps: attemps,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             TextField(
               controller: inputController,
               onSubmitted: computeWordEntry,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black)),
                   hintText: 'Digite uma palavra',
@@ -49,11 +49,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black, width: 2))),
             ),
-            SizedBox(
+            Offstage(
+                offstage: attemps == 0,
+                child: Result(distance: currentDistance, word: currentWord)),
+            const SizedBox(
               height: 10,
             ),
-            Offstage(offstage: attemps != 0, child: WelcomeText()),
-            SizedBox(
+            Offstage(offstage: attemps != 0, child: const WelcomeText()),
+            const SizedBox(
               height: 10,
             ),
             Offstage(offstage: attemps == 0, child: WordList(items: wordList))
@@ -61,14 +64,33 @@ class _HomeScreenState extends State<HomeScreen> {
         ));
   }
 
-  void computeWordEntry(String value) async {
-    final distance = await wordService.getDistance(value);
-    setState(() {
-      wordList.add(WordItem(distance.distance, value));
-      wordList.sort((a, b) => a.distance.compareTo(b.distance));
-      attemps++;
-      inputController.clear();
-    });
-    developer.log('usuario digitou: $value e foi tentativa: $attemps');
+  void computeWordEntry(String wordTyped) async {
+    isRepeatedWord = false;
+    if (wordAlreadyExists(wordTyped)) {
+      currentDistance = -2;
+      setState(() {});
+    } else {
+      final distance = await wordService.getDistance(wordTyped);
+      setState(() {
+        currentWord = wordTyped;
+        currentDistance = distance.distance;
+        if (wordService.isValid(currentDistance)) {
+          wordList.add(WordItem(distance.distance, wordTyped));
+          wordList.sort((a, b) => a.distance.compareTo(b.distance));
+          attemps++;
+        }
+      });
+    }
+    inputController.clear();
+  }
+
+  bool wordAlreadyExists(String word) {
+    bool alreadyExists = false;
+    for (final item in wordList) {
+      if (item.word.contains(word)) {
+        alreadyExists = true;
+      }
+    }
+    return alreadyExists;
   }
 }

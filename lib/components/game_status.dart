@@ -2,7 +2,7 @@ import 'package:context_app/services/word_service.dart';
 import 'package:flutter/material.dart';
 
 class GameStatus extends StatelessWidget {
-  int attemps;
+  final int attemps;
   GameStatus({required this.attemps, super.key});
   final WordService wordService = WordService();
 
